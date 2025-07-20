@@ -2,9 +2,9 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the gh-pages branch
   push:
-    branches: ["main"]
+    branches: ["gh-pages"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -44,8 +44,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          # Specify the branch to deploy to GitHub Pages
-          branch: gh-pages
-          # Specify the directory containing the static content
-          directory: ./public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
